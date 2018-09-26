@@ -26,12 +26,12 @@ If you do not, please contact sales (800-800-6245 ext. 3) for a trial.
 | JAVA 1.2  | No  |
 | JAVA 1.3  | No  |
 | JAVA 1.4  | No  |
-| JAVA 5.0  | No  |
-| JAVA 6.0  | No  |
-| JAVA 7.0  | No  |
-| JAVA 8.0  | Yes |
-| JAVA 9.0  | Yes |
-| JAVA 10.0 | Yes |
+| JAVA 5  | No  |
+| JAVA 6  | No  |
+| JAVA 7  | No  |
+| JAVA 8  | Yes |
+| JAVA 9  | Yes |
+| JAVA 10 | Yes |
 
 ### Installing
 
