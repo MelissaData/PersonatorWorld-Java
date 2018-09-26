@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="650.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="melissadata.personatorworld.view.PersonatorWorldController">
+    <center>
+        <TabPane fx:id="tabPane" prefHeight="323.0" prefWidth="674.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+            <tabs>
+                <Tab text="Configuration">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <opaqueInsets>
+                                <Insets />
+                            </opaqueInsets>
+                     <children>
+                        <Label layoutX="8.0" layoutY="14.0" text="Name Options">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <ComboBox fx:id="optionCorrectFirstNameBox" layoutX="118.0" layoutY="46.0" onAction="#optionCorrectFirstName" prefHeight="25" prefWidth="150.0" />
+                        <ComboBox fx:id="optionNameHintBox" layoutX="118.0" layoutY="71.0" onAction="#optionNameHint" prefHeight="25" prefWidth="150.0" />
+                        <ComboBox fx:id="optionGenderPopulationBox" layoutX="118.0" layoutY="96.0" onAction="#optionGenderPopulation" prefHeight="25" prefWidth="150.0" />
+                        <ComboBox fx:id="optionGenderAggressionBox" layoutX="118.0" layoutY="121.0" onAction="#optionGenderAggression" prefHeight="25" prefWidth="150.0" />
+                        <ComboBox fx:id="optionMiddleNameLogicBox" layoutX="118.0" layoutY="146.0" onAction="#optionMiddleNameLogic" prefHeight="25" prefWidth="150.0" />
+                        <Label layoutX="15.0" layoutY="50.0" text="Correct First Name:" />
+                        <Label layoutX="57.0" layoutY="75.0" text="Name Hint:" />
+                        <Label layoutX="15.0" layoutY="100.0" text="Gender Population:" />
+                        <Label layoutX="13.0" layoutY="125.0" text="Gender Aggression:" />
+                        <Label layoutX="11.0" layoutY="150.0" text="Middle Name Logic:" />
+                        <Label layoutX="8.0" layoutY="196.0" text="Address Options">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="311.0" layoutY="18.0" text="Phone Options">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="311.0" layoutY="196.0" text="Email Options">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <ComboBox fx:id="optionDeliveryLinesBox" layoutX="118.0" layoutY="236.0" onAction="#optionDeliveryLines" prefWidth="150.0" />
+                        <ComboBox fx:id="optionLineSeparatorBox" layoutX="118.0" layoutY="261.0" onAction="#optionLineSeparator" prefWidth="150.0" />
+                        <ComboBox fx:id="optionOutputScriptBox" layoutX="118.0" layoutY="286.0" onAction="#optionOutputScript" prefWidth="150.0" />
+                        <Label layoutX="42.0" layoutY="240.0" text="Delivery Lines:" />
+                        <Label layoutX="38.0" layoutY="265.0" text="Line Separator:" />
+                        <Label layoutX="43.0" layoutY="290.0" text="Output Script:" />
+                        <ComboBox fx:id="optionVerifyMailboxBox" layoutX="436.0" layoutY="236.0" onAction="#optionVerifyMailbox" prefWidth="150.0" />
+                        <ComboBox fx:id="optionDomainCorrectionBox" layoutX="436.0" layoutY="261.0" onAction="#setOptionDomainCorrection" prefWidth="150.0" />
+                        <TextField fx:id="optionEmailTimeToWaitBox" layoutX="436.0" layoutY="286.0" prefWidth="150.0" promptText="Enter Integer..." />
+                        <Label layoutX="357.0" layoutY="240.0" text="Verify Mailbox:" />
+                        <Label layoutX="332.0" layoutY="265.0" text="Domain Correction:" />
+                        <Label layoutX="362.0" layoutY="290.0" text="Time To Wait:" />
+                        <ComboBox fx:id="optionPhoneVerifyBox" layoutX="443.0" layoutY="46.0" onAction="#optionPhoneVerify" prefWidth="150.0" />
+                        <ComboBox fx:id="optionCallerIDBox" layoutX="443.0" layoutY="71.0" onAction="#optionCallerID" prefWidth="150.0" />
+                        <TextField fx:id="optionDefaultCallingCodeBox" layoutX="443.0" layoutY="96.0" prefWidth="150.0" promptText="Enter Calling Code..." />
+                        <TextField fx:id="optionPhoneTimeToWaitBox" layoutX="443.0" layoutY="121.0" prefWidth="150.0" promptText="Enter Integer..." />
+                        <Label layoutX="371.0" layoutY="50.0" text="Phone Verify:" />
+                        <Label layoutX="393.0" layoutY="75.0" text="Caller ID:" />
+                        <Label layoutX="329.0" layoutY="100.0" text="Default Calling Code:" />
+                        <Label layoutX="367.0" layoutY="125.0" text="Time To Wait:" />
+                        <CheckBox disable="true" layoutX="11.0" layoutY="400.0" mnemonicParsing="false" selected="true" text="Check" />
+                        <CheckBox fx:id="actionVerifyCheckbox" layoutX="11.0" layoutY="425.0" mnemonicParsing="false" text="Verify" />
+                        <Label layoutX="11.0" layoutY="375.0" text="Actions">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <CheckBox fx:id="actionScreenCheckbox" layoutX="11.0" layoutY="450.0" mnemonicParsing="false" text="Screen" />
+
+                     </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab fx:id="responseTabButtonArea" text="Response">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <TextArea fx:id="ResponseTextArea" layoutX="208.0" layoutY="58.0" prefHeight="471.0" prefWidth="600.0" promptText="Send a request..." AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                            </children></AnchorPane>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </center>
+    <left>
+        <AnchorPane prefHeight="449.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <children>
+                <TextField fx:id="inputLicenseKeyText" layoutX="12.0" layoutY="47.0" prefHeight="25.0" prefWidth="180.0" promptText="License Key..." />
+                <Label contentDisplay="CENTER" layoutX="30.0" layoutY="7.0" text="Web Service Input" textAlignment="CENTER" underline="true">
+                    <font>
+                        <Font size="17.0" />
+                    </font>
+                </Label>
+                <Label layoutX="40.0" layoutY="80.0" text="Contact Information" underline="true">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="inputNationalIDText" layoutX="10.0" layoutY="100.0" prefHeight="25.0" prefWidth="180.0" promptText="Enter National ID..." />
+                <TextField fx:id="inputFullNameText" layoutX="10.0" layoutY="125.0" prefHeight="25.0" prefWidth="180.0" promptText="Enter Full Name..." />
+                <TextField fx:id="inputCompanyText" layoutX="10.0" layoutY="150.0" prefHeight="25.0" prefWidth="180.0" promptText="Enter Company..." />
+                <TextField fx:id="inputDateOfBirthText" layoutX="10.0" layoutY="175.0" prefHeight="25.0" prefWidth="180.0" promptText="Enter Date of Birth..." />
+                <TextField fx:id="inputPhoneNumberText" layoutX="10.0" layoutY="200.0" prefHeight="25.0" prefWidth="180.0" promptText="Enter Phone Number..." />
+                <TextField fx:id="inputEmailAddressText" layoutX="10.0" layoutY="225.0" prefHeight="25.0" prefWidth="180.0" promptText="Enter Email Address..." />
+                <Label layoutX="36.0" layoutY="250.0" text="Address Information" underline="true">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="inputAddressLine1Text" layoutX="10.0" layoutY="275.0" prefHeight="25.0" prefWidth="180.0" promptText="Enter Address Line 1..." />
+                <TextField fx:id="inputAddressLine2Text" layoutX="10.0" layoutY="300.0" prefHeight="25.0" prefWidth="180.0" promptText="Enter Address Line 2..." />
+                <TextField fx:id="inputAddressLine3Text" layoutX="10.0" layoutY="325.0" prefHeight="25.0" prefWidth="180.0" promptText="Enter Address Line 3..." />
+                <TextField fx:id="inputAddressLine4Text" layoutX="10.0" layoutY="350.0" prefHeight="25.0" prefWidth="180.0" promptText="Enter Address Line 4..." />
+                <TextField fx:id="inputLocalityText" layoutX="10.0" layoutY="375.0" prefHeight="25.0" prefWidth="180.0" promptText="Enter Locality..." />
+                <TextField fx:id="inputAdministrativeAreaText" layoutX="10.0" layoutY="400.0" prefHeight="25.0" prefWidth="180.0" promptText="Enter Administrative Area..." />
+                <TextField fx:id="inputPostalCodeText" layoutX="10.0" layoutY="425.0" prefHeight="25.0" prefWidth="180.0" promptText="Enter Postal Code..." />
+                <TextField fx:id="inputCountryText" layoutX="10.0" layoutY="450.0" prefHeight="25.0" prefWidth="180.0" promptText="Enter Country...">
+                <opaqueInsets>
+                    <Insets />
+                </opaqueInsets></TextField>
+                <ButtonBar layoutY="510.0" prefHeight="40.0" prefWidth="110.0">
+                    <buttons>
+                        <Button fx:id="buttonClear" mnemonicParsing="false" text="Clear" />
+                        <Button fx:id="buttonSend" mnemonicParsing="false" prefHeight="25.0" text="Send" />
+                    </buttons>
+                </ButtonBar>
+            </children>
+        </AnchorPane>
+    </left>
+    <bottom>
+        <TextArea fx:id="RequestTextArea" editable="false" prefHeight="100.0" prefWidth="600.0" promptText="Send a request..." wrapText="true" BorderPane.alignment="CENTER" />
+    </bottom>
+</BorderPane>
