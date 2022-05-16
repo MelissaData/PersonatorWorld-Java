@@ -1,4 +1,4 @@
-package melissadata.personatorworld.view;
+package com.melissadata.personatorworld.view;
 
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -9,11 +9,11 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import melissadata.personatorworld.model.PersonatorWorldTransaction;
-import melissadata.personatorworld.model.PersonatorWorldOptions;
-import melissadata.personatorworld.Main;
+import com.melissadata.personatorworld.model.PersonatorWorldTransaction;
+import com.melissadata.personatorworld.model.PersonatorWorldOptions;
+import com.melissadata.personatorworld.Main;
 
-public class PersonatorWorldController  {
+public class PersonatorWorldController {
 
     private Main main;
     private PersonatorWorldOptions option;

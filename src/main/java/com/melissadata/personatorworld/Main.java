@@ -1,4 +1,4 @@
-package melissadata.personatorworld;
+package com.melissadata.personatorworld;
 
 import java.io.IOException;
 
@@ -7,8 +7,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import melissadata.personatorworld.view.PersonatorWorldController;
-import melissadata.personatorworld.view.RootLayoutController;
+import com.melissadata.personatorworld.view.PersonatorWorldController;
+import com.melissadata.personatorworld.view.RootLayoutController;
 
 public class Main extends Application {
     private Stage primaryStage;
@@ -33,7 +33,7 @@ public class Main extends Application {
         try {
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("view/RootLayout.fxml"));
+            loader.setLocation(Main.class.getResource("RootLayout.fxml"));
             rootLayout = (BorderPane) loader.load();
 
             // Show the scene containing the root layout.
@@ -57,7 +57,7 @@ public class Main extends Application {
         try {
             // Load Personator World overview.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("view/PersonatorWorld.fxml"));
+            loader.setLocation(Main.class.getResource("PersonatorWorld.fxml"));
             BorderPane personatorWorld = (BorderPane) loader.load();
 
             // Set Personator World

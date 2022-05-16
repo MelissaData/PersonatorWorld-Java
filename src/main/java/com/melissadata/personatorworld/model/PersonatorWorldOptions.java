@@ -1,4 +1,7 @@
-package melissadata.personatorworld.model;
+package com.melissadata.personatorworld.model;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -44,108 +47,82 @@ public class PersonatorWorldOptions {
         optionTimeToWaitEmail         = new SimpleStringProperty("");
     }
 
+    public String generateOptionString() {
+        String optionString = "";
+
+        String nameOptions = generateNameOptionString();
+        String addressOptions = generateAddressOptionString();
+        String phoneOptions = generatePhoneOptionString();
+        String emailOptions = generateEmailOptionString();
+
+        if(!nameOptions.equals(""))
+            optionString += "&nameOpt=" + nameOptions;
+
+        if(!addressOptions.equals(""))
+            optionString += "&AddrOpt=" + addressOptions;
+
+        if(!phoneOptions.equals(""))
+            optionString += "&PhoneOpt=" + phoneOptions;
+
+        if(!emailOptions.equals(""))
+            optionString += "&EmailOpt=" + emailOptions;
+        return optionString;
+    }
+
     // Generate Name Options Portion of String
     public String generateNameOptionString(){
-        String nameOptionString = "";
-        if(!getOptionCorrectFirstName().equals(""))
-            nameOptionString += "CorrectFirstName:" + getOptionCorrectFirstName();
+        String[] options = {
+            generateOptionParam("CorrectFirstName", getOptionCorrectFirstName()),
+            generateOptionParam("NameHint", getOptionNameHint()),
+            generateOptionParam("GenderPopulation", getOptionGenderPopulation()),
+            generateOptionParam("GenderAggression", getOptionGenderAggression()),
+            generateOptionParam("MiddleNameLogic", getOptionMiddleNameLogic()),
+        };
 
-        if(!getOptionNameHint().equals("") && !nameOptionString.equals(""))
-            nameOptionString += ",NameHint:" + getOptionNameHint();
-        else if(!getOptionNameHint().equals("") && nameOptionString.equals(""))
-            nameOptionString += "NameHint:" + getOptionNameHint();
-
-        if(!getOptionGenderPopulation().equals("") && !nameOptionString.equals(""))
-            nameOptionString += ",GenderPopulation:" + getOptionGenderPopulation();
-        else if(!getOptionGenderPopulation().equals("") && nameOptionString.equals(""))
-            nameOptionString += "GenderPopulation:" + getOptionGenderPopulation();
-
-        if(!getOptionGenderAggression().equals("") && !nameOptionString.equals(""))
-            nameOptionString += ",GenderAggression:" + getOptionGenderAggression();
-        else if(!getOptionGenderAggression().equals("") && nameOptionString.equals(""))
-            nameOptionString += "GenderAggression:" + getOptionGenderAggression();
-
-        if(!getOptionMiddleNameLogic().equals("") && !nameOptionString.equals(""))
-            nameOptionString += ",MiddleNameLogic:" + getOptionMiddleNameLogic();
-        else if(!getOptionMiddleNameLogic().equals("") && nameOptionString.equals(""))
-            nameOptionString += "MiddleNameLogic:" + getOptionMiddleNameLogic();
-        return nameOptionString;
+        return joinOptionParams(options);
     }
 
     // Generate Address Option Portion of String
     public String generateAddressOptionString(){
-        String optionString = "";
-        if(!getOptionDeliveryLines().equals(""))
-            optionString += "DeliveryLines:" + getOptionDeliveryLines();
-
-        if(!getOptionLineSeparator().equals("") && !optionString.equals(""))
-            optionString += ",LineSeparator:" + getOptionLineSeparator();
-        else if(!getOptionLineSeparator().equals("") && optionString.equals(""))
-            optionString += "LineSeparator:" + getOptionLineSeparator();
-
-        if(!getOptionOutputScript().equals("") && !optionString.equals(""))
-            optionString += ",OutputScript:" + getOptionOutputScript();
-        else if(!getOptionOutputScript().equals("") && optionString.equals(""))
-            optionString += "OutputScript:" + getOptionOutputScript();
-        return optionString;
+        String[] options = {
+            generateOptionParam("DeliveryLines", getOptionDeliveryLines()),
+            generateOptionParam("LineSeparator", getOptionLineSeparator()),
+            generateOptionParam("OutputScript", getOptionOutputScript()),
+        };
+        return joinOptionParams(options);
     }
 
     // Generate Phone Option Portion of String
     public String generatePhoneOptionString(){
-        String optionString = "";
-        if(!getOptionPhoneVerifyLevel().equals(""))
-            optionString += "VerifyPhone:" + getOptionPhoneVerifyLevel();
-
-        if(!getOptionCallerID().equals("") && !optionString.equals(""))
-            optionString += ",CallerID:" + getOptionCallerID();
-        else if(!getOptionCallerID().equals("") && optionString.equals(""))
-            optionString += "CallerID:" + getOptionCallerID();
-
-        if(!getOptionDefaultCallingCode().equals("") && !optionString.equals(""))
-            optionString += ",DefaultCallingCode:" + getOptionDefaultCallingCode();
-        else if(!getOptionDefaultCallingCode().equals("") && optionString.equals(""))
-            optionString += "DefaultCallingCode:" + getOptionDefaultCallingCode();
-
-        if(!getOptionTimeToWaitPhone().equals("") && !optionString.equals(""))
-            optionString += ",TimeToWait:" + getOptionTimeToWaitPhone();
-        else if(!getOptionTimeToWaitPhone().equals("") && optionString.equals(""))
-            optionString += "TimeToWait:" + getOptionTimeToWaitPhone();
-        return optionString;
+        String[] options = {
+            generateOptionParam("VerifyPhone", getOptionPhoneVerifyLevel()),
+            generateOptionParam("CallerID", getOptionCallerID()),
+            generateOptionParam("DefaultCallingCode", getOptionDefaultCallingCode()),
+            generateOptionParam("TimeToWait", getOptionTimeToWaitPhone()),
+        };
+        return joinOptionParams(options);
     }
 
     // Generate Email Option Portion of String
     public String generateEmailOptionString() {
-        String optionString = "";
-        if(!getOptionEmailVerifyMailboxLevel().equals(""))
-            optionString += "VerifyMailbox:" + getOptionEmailVerifyMailboxLevel();
-
-        if(!getOptionDomainCorrection().equals("") && !optionString.equals(""))
-            optionString += ",DomainCorrection:" + getOptionDomainCorrection();
-        else if(!getOptionDomainCorrection().equals("") && optionString.equals(""))
-            optionString += "DomainCorrection:" + getOptionDomainCorrection();
-
-        if(!getOptionTimeToWaitEmail().equals("") && !optionString.equals(""))
-            optionString += ",TimeToWait:" + getOptionTimeToWaitEmail();
-        else if(!getOptionTimeToWaitEmail().equals("") && optionString.equals(""))
-            optionString += "TimeToWait:" + getOptionTimeToWaitEmail();
-        return optionString;
+        String[] options = {
+            generateOptionParam("VerifyMailbox", getOptionEmailVerifyMailboxLevel()),
+            generateOptionParam("DomainCorrection", getOptionDomainCorrection()),
+            generateOptionParam("TimeToWait", getOptionTimeToWaitEmail()),
+        };
+        return joinOptionParams(options);
     }
 
-    public String generateOptionString() {
-        String optionString = "";
+    private String generateOptionParam(String name, String value) {
+        return value.equals("") ? "" : name + ":" + value;
+    }
 
-        if(!generateNameOptionString().equals(""))
-            optionString += "&nameOpt=" + generateNameOptionString();
-
-        if(!generateAddressOptionString().equals(""))
-            optionString += "&AddrOpt=" + generateAddressOptionString();
-
-        if(!generatePhoneOptionString().equals(""))
-            optionString += "&PhoneOpt=" + generatePhoneOptionString();
-
-        if(!generateEmailOptionString().equals(""))
-            optionString += "&EmailOpt=" + generateEmailOptionString();
-        return optionString;
+    private String joinOptionParams(String[] options) {
+        List<String> optionList = new ArrayList<>();
+        for (String option : options) {
+            if(!option.equals("")) optionList.add(option);
+        }
+        return String.join(",", optionList);
     }
 
     public String getOptionCorrectFirstName() {

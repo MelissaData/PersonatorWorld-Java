@@ -1,16 +1,13 @@
-package melissadata.personatorworld.model;
+package com.melissadata.personatorworld.model;
 
-import org.apache.sling.commons.json.JSONObject;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
 
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
 import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.URI;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.stream.Collectors;
 
 public class PersonatorWorldTransaction {
 
@@ -20,7 +17,8 @@ public class PersonatorWorldTransaction {
 
     private String identNumber;
     private String nationalID, fullName, companyName, dateOfBirth, phone, email;
-    private String addressLine1, addressLine2, addressLine3, addressLine4, locality, administrativeArea, postalCode, country;
+    private String addressLine1, addressLine2, addressLine3, addressLine4,
+                   locality, administrativeArea, postalCode, country;
 
     private boolean actionVerify;
     private boolean actionScreen;
@@ -47,28 +45,12 @@ public class PersonatorWorldTransaction {
 
     public String processTransaction(String request) {
         String response = "";
-        URI uri;
-        URL url;
         try {
-            uri = new URI(request);
-            url = new URL(uri.toURL().toString());
-
-            HttpURLConnection urlConn = (HttpURLConnection)(url.openConnection());
-
-            BufferedReader in = new BufferedReader(new InputStreamReader(urlConn.getInputStream()));
-
-            StringReader reader;
-            StringWriter writer = new StringWriter();
-            StringBuilder jsonResponse = new StringBuilder();
-            String inputLine = "";
-
-            while ((inputLine = in.readLine()) != null) {
-                jsonResponse.append(inputLine);
-            }
-            @SuppressWarnings("deprecation")
-            JSONObject test = new JSONObject(jsonResponse.toString());
-            response = test.toString(10);
-
+            URL url = new URL(request);
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(url.openStream()));
+            String responseBody = in.lines().collect(Collectors.joining());
+            response = getPrettyJSON(responseBody);
 
         } catch (Exception e){
             System.out.println("Error sending request: \n" + e);
@@ -76,62 +58,51 @@ public class PersonatorWorldTransaction {
         return response;
     }
 
+    private String getPrettyJSON(String json) {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        JsonObject responseObject = gson.fromJson(json, JsonObject.class);
+        return gson.toJson(responseObject);
+    }
+
     public String generateRequestString(PersonatorWorldOptions option) {
-        String request = "";
-        request = endpoint;
-        request += "&id=" + getIdentNumber();
-        request += option.generateOptionString();
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(endpoint)
+            .append("&id=" + getIdentNumber())
+            .append(option.generateOptionString())
+
+            .append(generateRequestParam("act", getActions()))
+            .append(generateRequestParam("nat", getNationalID()))
+            .append(generateRequestParam("full", getFullName()))
+            .append(generateRequestParam("comp", getCompanyName()))
+            .append(generateRequestParam("phone", getPhone()))
+            .append(generateRequestParam("email", getEmail()))
+            .append(generateRequestParam("dob", getDateOfBirth()))
+            .append(generateRequestParam("a1", getAddressLine1()))
+            .append(generateRequestParam("a2", getAddressLine2()))
+            .append(generateRequestParam("a3", getAddressLine3()))
+            .append(generateRequestParam("a4", getAddressLine4()))
+            .append(generateRequestParam("loc", getLocality()))
+            .append(generateRequestParam("admarea", getAdministrativeArea()))
+            .append(generateRequestParam("postal", getPostalCode()))
+            .append(generateRequestParam("ctry", getCountry()));
+
+        return sb.toString();
+    }
+
+    private String generateRequestParam(String arg, String value) {
+        String encodedValue = "";
         try {
-            request += "&act=" + getActions();
-            if(!getNationalID().equals(""))
-                request += "&nat=" + URLEncoder.encode(getNationalID(), "UTF-8");
-
-            if(!getFullName().equals(""))
-                request += "&full=" + URLEncoder.encode(getFullName(), "UTF-8");
-
-            if(!getCompanyName().equals(""))
-                request += "&comp=" + URLEncoder.encode(getCompanyName(), "UTF-8");
-
-            if(!getPhone().equals(""))
-                request += "&phone=" + URLEncoder.encode(getPhone(), "UTF-8");
-
-            if(!getEmail().equals(""))
-                request += "&email=" + URLEncoder.encode(getEmail(), "UTF-8");
-
-            if(!getDateOfBirth().equals(""))
-                request += "&dob=" + URLEncoder.encode(getDateOfBirth(), "UTF-8");
-
-            if(!getAddressLine1().equals(""))
-                request += "&a1=" + URLEncoder.encode(getAddressLine1(), "UTF-8");
-
-            if(!getAddressLine2().equals(""))
-                request += "&a2=" + URLEncoder.encode(getAddressLine2(), "UTF-8");
-
-            if(!getAddressLine3().equals(""))
-                request += "&a3=" + URLEncoder.encode(getAddressLine3(), "UTF-8");
-
-            if(!getAddressLine4().equals(""))
-                request += "&a4=" + URLEncoder.encode(getAddressLine4(), "UTF-8");
-
-            if(!getLocality().equals(""))
-                request += "&loc=" + URLEncoder.encode(getLocality(), "UTF-8");
-
-            if(!getAdministrativeArea().equals(""))
-                request += "&admarea=" + URLEncoder.encode(getAdministrativeArea(), "UTF-8");
-
-            if(!getPostalCode().equals(""))
-                request += "&postal=" + URLEncoder.encode(getPostalCode(), "UTF-8");
-
-            if(!getCountry().equals(""))
-                request += "&ctry=" + URLEncoder.encode(getCountry(), "UTF-8");
-
+            encodedValue = URLEncoder.encode(value, "UTF-8");
         } catch (UnsupportedEncodingException e) {
-            System.out.println("Unsupported Encoding Exception: " +e);
+            System.out.println("Unsupported Encoding Exception: " + e);
         }
 
+        if(!encodedValue.equals("")) {
+            return "&" + arg + "=" + encodedValue;
+        }
 
-
-        return request;
+        return "";
     }
 
     public PersonatorWorldOptions getOptions() {
